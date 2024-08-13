@@ -1,22 +1,17 @@
-export default () => {
-  //   const todoListArr = [
-  //     <tr>
-  //     <td>July</td>
-  //     <td>Dooley</td>
-  //     <td>july@example.com</td>
-  //   </tr>
+export default (props) => {
+  //   const todoListArr = [];
+  //   if (props.todoListArr) {
+  //     todoListArr = props.todoListArr;
+  //   }
 
-  //   ];
+  //   console.dir(props.todoListArr);
+  //   let [todoListArr] = props;
 
-  const todoListArr = [
-    { no: 101, title: "운동하기", done: false },
-    { no: 102, title: "운동하기2", done: false },
-    { no: 103, title: "운동하기3", done: false },
-  ];
-
+  console.dir(props.props);
+  const todoListArr = props.props;
   return (
     <div>
-      <table class="table table-hover">
+      <table className="table table-hover">
         <thead>
           <tr style={{ textAlign: "center" }}>
             <th>Confirm</th>
@@ -25,11 +20,13 @@ export default () => {
           </tr>
         </thead>
         <tbody>
-          {todoListArr.map((item, idx) => {
+          {todoListArr.map((item) => {
             //중괄호  enter 하면 return 문을 꼭 넣어야한다.
             return (
-              <tr>
-                <td>{item.no}</td>
+              <tr key={item.no}>
+                <td>
+                  <input type="checkbox" />
+                </td>
                 <td>{item.title}</td>
                 <td className="btn-group">
                   <button className="btn btn-secondary">edit</button>
