@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>Hello React Project</h1>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // xml은 ROOT 엘리먼트가 하나만 있어야 한다.. (컴포넌트로 처리한다)
+      // https://en.wikipedia.org/wiki/Root_element
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      // root.render(
+      //   <h2>Welcome</h2><h3>오신것을 환영합니다.</h3>
+      // );
+
+      // 빈 태그로도 가능. div 태그여도 됨
+      root.render(
+        <>
+          <h2>Welcome</h2>
+          <h3>오신것을 환영합니다.</h3>
+        </>
+      );
+
+      // 새로운 함수형 컴포넌트 선언 - HTML 태그처럼 사용가능하다
+      function Hello() {
+        return <h1>Hello World!</h1>;
+      }
+      //   root.render(<Hello />);
+      //   root.render(new Hello());
+    </script>
+  </body>
+</html>
