@@ -9,6 +9,7 @@ const App = () => {
   return (
     <>
       <h3>Welcome</h3>
+      <Hello />
     </>
   );
 }; // 수식이 들어가 있으면
