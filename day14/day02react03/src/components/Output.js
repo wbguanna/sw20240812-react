@@ -9,18 +9,9 @@ export default () => {
   //   ];
 
   const todoListArr = [
-    <tr>
-      <td colSpan={3}>미니프로젝트 만들기1</td>
-    </tr>,
-    <tr>
-      <td colSpan={3}>미니프로젝트 만들기1</td>
-    </tr>,
-    <tr>
-      <td colSpan={3}>미니프로젝트 만들기1</td>
-    </tr>,
-    <tr>
-      <td colSpan={3}>미니프로젝트 만들기1</td>
-    </tr>,
+    { no: 101, title: "운동하기", done: false },
+    { no: 102, title: "운동하기2", done: false },
+    { no: 103, title: "운동하기3", done: false },
   ];
 
   return (
@@ -33,7 +24,21 @@ export default () => {
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>{todoListArr}</tbody>
+        <tbody>
+          {todoListArr.map((item, idx) => {
+            //중괄호  enter 하면 return 문을 꼭 넣어야한다.
+            return (
+              <tr>
+                <td>{item.no}</td>
+                <td>{item.title}</td>
+                <td className="btn-group">
+                  <button className="btn btn-secondary">edit</button>
+                  <button className="btn btn-emergency">x</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
