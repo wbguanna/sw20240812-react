@@ -73,13 +73,19 @@ const App = () => {
                       <div className="input-group mb-3">
                         <div className="input-group-prepend">
                           <div className="input-group-text">
-                            <input type="checkbox" />
+                            <input
+                              type="checkbox"
+                              checked={item.done && "checked"}
+                            />
                           </div>
                         </div>
                         <input
                           type="text"
                           className="form-control"
                           readOnly
+                          style={{
+                            textDecoration: item.done && "line-through",
+                          }}
                           value={item.title}
                         />
                         <div className="input-group-append">
