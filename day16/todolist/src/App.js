@@ -6,14 +6,29 @@ const App = () => {
   // 구조분해 할당 = state변수, setter함수
   const [name, setName] = useState("Todo List");
   const [todoList, setTodoList] = useState([
-    { no: 101, title: "공부하기", done: false },
-    { no: 102, title: "자바하기", done: true },
-    { no: 103, title: "리액트하기", done: false },
-    { no: 104, title: "스프링하기", done: false },
+    { no: 101, title: "공부하기", done: false, isEdit: false },
+    { no: 102, title: "자바하기", done: true, isEdit: true },
+    { no: 103, title: "리액트하기", done: false, isEdit: false },
+    { no: 104, title: "스프링하기", done: false, isEdit: false },
   ]);
+  //   isEdit 보다는 flag 설정하고 no 정보 따로 가지고 비교?
   const [noCnt, setNoCnt] = useState(105);
 
   const [inputTitle, setInputTitle] = useState("");
+
+  // 내가 생각했던 점
+  const [editState, setEditState] = useState({ state: false, editNo: -1 });
+
+  //   useEffect( ,[outputTitle])
+
+  const onEdit = ({ no, title }) => {
+    setTodoList([
+      ...todoList.map((item) => {
+        if (item.no === no) item.title = title;
+        return item;
+      }),
+    ]);
+  };
 
   const onClickEvent = () => {
     // 기존 내용에 새 내용을 추가 해서 새 배열을 생성
@@ -28,15 +43,40 @@ const App = () => {
 
   const onDelete = ({ no, title, done }) => {
     const newList = todoList.filter((todo) => {
-      return todo.no != no;
+      return todo.no !== no;
     });
     setTodoList(newList);
   };
 
-  const lineThroughClass = {
-    textDecoration: "line-through",
-    color: "red",
+  const onDoneFlag = ({ no, title, done }) => {
+    console.log("onDoneFlag", no);
+    // 1. 에러죠?
+    // setTodoList([
+    //   ...todoList.forEach((item, idx) => {
+    //     if (item.no === no) {
+    //       todoList[idx].done = !done;
+    //     }
+    //   }),
+    // ]);
+
+    // 2.
+    // todoList.forEach((item, idx) => {
+    //   if (item.no === no) {
+    //     todoList[idx].done = !done;
+    //   }
+    // });
+    // setTodoList([...todoList]);
+
+    // // 3. // 오류날 가능성 높음
+    const newTodoList = [...todoList];
+    newTodoList.forEach((item, idx) => {
+      if (item.no === no) {
+        todoList[idx].done = !done;
+      }
+    });
+    setTodoList([...newTodoList]);
   };
+
   return (
     <div className="todoList">
       <div className="App-header">
@@ -74,37 +114,8 @@ const App = () => {
                 return (
                   <tr key={item.no}>
                     <td colSpan={3} style={{ padding: "0px" }}>
-                      <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                          <div className="input-group-text">
-                            <input
-                              type="checkbox"
-                              checked={item.done && "checked"}
-                            />
-                          </div>
-                        </div>
-                        <input
-                          type="text"
-                          className="form-control"
-                          readOnly
-                          style={item.done ? lineThroughClass : {}}
-                          value={item.title}
-                        />
-                        <div className="input-group-append">
-                          <button className="btn btn-primary" type="button">
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => {
-                              onDelete(item);
-                            }}
-                            className="btn btn-danger"
-                            type="button"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
+                      {/* ItemRow */}
+                      <ItemRow props={(item, onDoneFlag, onDoneFlag, onEdit)} />
                     </td>
                   </tr>
                 );
