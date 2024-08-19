@@ -1,10 +1,15 @@
 import "./App.css";
+import { useState } from "react";
 
 const App = () => {
-  let name = "Todo List";
-
+  const [name, setName] = useState("Todo List");
+  const [todoList, setTodoList] = useState([
+    <li>팀프로젝트 준비</li>,
+    <li>React 복습</li>,
+    <li>Backend 예습</li>,
+  ]);
   const onClickEvent = () => {
-    name = "할일목록";
+    setName("할일목록");
     console.log("클릭이벤트 발생", name);
   };
   return (
@@ -18,9 +23,9 @@ const App = () => {
         {/* 중괄호로 이벤트 함수 추가 가능 */}
       </div>
       <div className="list-body">
-        <ol>
-          <li></li>
-        </ol>
+        {/* 여기다 집어넣는것은 동적으로 집어넣는 방법은 아니다 */}
+        {/* ex) appendChild */}
+        <ul>{todoList}</ul>
       </div>
     </div>
   );
