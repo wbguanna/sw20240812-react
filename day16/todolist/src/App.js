@@ -33,6 +33,10 @@ const App = () => {
     setTodoList(newList);
   };
 
+  const lineThroughClass = {
+    textDecoration: "line-through",
+    color: "red",
+  };
   return (
     <div className="todoList">
       <div className="App-header">
@@ -83,9 +87,7 @@ const App = () => {
                           type="text"
                           className="form-control"
                           readOnly
-                          style={{
-                            textDecoration: item.done && "line-through",
-                          }}
+                          style={item.done ? lineThroughClass : {}}
                           value={item.title}
                         />
                         <div className="input-group-append">
