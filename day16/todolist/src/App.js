@@ -4,9 +4,10 @@ import { useState } from "react";
 const App = () => {
   const [name, setName] = useState("Todo List");
   const [todoList, setTodoList] = useState([
-    <li>팀프로젝트 준비</li>,
-    <li>React 복습</li>,
-    <li>Backend 예습</li>,
+    { no: 1, title: "Buy milk", done: false },
+    { no: 2, title: "Buy milk", done: false },
+    { no: 3, title: "Buy milk", done: false },
+    { no: 4, title: "Buy milk", done: false },
   ]);
   const onClickEvent = () => {
     setName("할일목록");
@@ -25,7 +26,12 @@ const App = () => {
       <div className="list-body">
         {/* 여기다 집어넣는것은 동적으로 집어넣는 방법은 아니다 */}
         {/* ex) appendChild */}
-        <ul>{todoList}</ul>
+        <ul>
+          {todoList.map((item) => {
+            // return item;
+            return JSON.stringify(item);
+          })}
+        </ul>
       </div>
     </div>
   );
