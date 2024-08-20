@@ -5,14 +5,28 @@ const parser = require("body-parser");
 
 app.set("port", 5000);
 
-app.get("/test", (req, res) => {
-  res.end("<h1>Node.js Server test</h1>");
+// static 미들 웨어
+app.use("/", express.static("public"));
+
+app.get("/todo", (req, res) => {
+  // 목록출력
+  res.send();
 });
 
-// 이렇게 http 단순 웹서버로도 기능할 수 있긴한다
-// const server = http.createServer((req, res) => {
-//   res.end("<h1>Node.js Server test</h1>");
-// });
+app.post("/todo", (req, res) => {
+  // 할일 입력
+  res.send();
+});
+
+app.put("/todo", (req, res) => {
+  // 할일 수정
+  res.send();
+});
+
+app.delete("/todo", (req, res) => {
+  // 할일 삭제
+  res.send();
+});
 
 const server = http.createServer(app);
 server.listen(app.get("port"), () => {
