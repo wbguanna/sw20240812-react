@@ -25,7 +25,7 @@ const App = () => {
       console.log(res);
       setTodoList(res["data"]);
     });
-  });
+  }, []);
   const [noCnt, setNoCnt] = useState(105);
 
   const [outputTitle, setOutputTtile] = useState("");
